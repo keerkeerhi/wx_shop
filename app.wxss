@@ -1,10 +1,70 @@
-/**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1577170793836'); /* IE9 */
+  src: url('iconfont.eot?t=1577170793836#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+  url('iconfont.woff?t=1577170793836') format('woff'),
+  url('iconfont.ttf?t=1577170793836') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1577170793836#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconkefu:before {
+  content: "\e635";
+}
+
+.iconqiche:before {
+  content: "\e656";
+}
+
+.icon04f:before {
+  content: "\e60b";
+}
+
+.iconfushi:before {
+  content: "\e640";
+}
+
+.icongouwuche:before {
+  content: "\e621";
+}
+
+.iconsousuo:before {
+  content: "\e628";
+}
+
+.iconhome:before {
+  content: "\e638";
+}
+
+.iconyonghu:before {
+  content: "\e63d";
+}
+
+.iconicon-test:before {
+  content: "\e622";
+}
+
+.iconfenzu:before {
+  content: "\e61c";
+}
+
+page {
+  font-family:Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif!important;
+  font-size:32rpx;          /*微信小程序中，使用rpx做单位*/
+}
+
+.bottom-shadow{
+  box-shadow: 0 20rpx 40rpx rgba(0,0,0,.1);
+}
+
+.base-shadow{
+  box-shadow: 0 0 40rpx rgba(0,0,0,.1);
+}
+

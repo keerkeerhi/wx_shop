@@ -1,13 +1,96 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="indexPage">
+  <view class="header1"></view>
+  <view class="header">
+    <view class="leftWords" >
+      安阳
+    </view>
+    <input class="searchInt"
+    value="{{searchWords}}"
+    bindinput="bindKeyInput"
+    bindfocus="beFocus" 
+    bindconfirm="doSearch"
+    bindblur="beNoFoc" ></input>
+    <navigator url="/pages/mine/mine" class="mineIcon" >
+      <label class="iconfont icon04f" ></label>
+    </navigator>
+    <view wx:if="{{!isFocus&&!searchWords}}" class="toSearch">
+      <label class="iconfont iconsousuo" ></label>
+      <label class="pholder" >搜索商品或商铺</label>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <!-- banner start -->
+  <view class="banner" >
+      <swiper indicator-dots="true"
+        autoplay="true" >
+        <block wx:for="{{banners}}" wx:key="*this">
+          <swiper-item>
+            <image mode="aspectFill" src="../../assets/imgs/banner{{index+1}}.png" ></image>
+          </swiper-item>
+        </block>
+      </swiper>
   </view>
+  <!-- banner end -->
+
+  <!-- 图标列表 start -->
+  <view class="icons bottom-shadow" >
+    <navigator url="/pages/shop/shop" class="icon-item" >
+      <view class="icon-icon" 
+      style="background-image: -webkit-linear-gradient(bottom, rgba(251,84,62,1),rgba(245,134,89,1));" >
+        <label class="iconfont iconicon-test" ></label>
+      </view>
+      <label>
+        超市
+      </label>
+    </navigator>
+    <navigator url="/pages/shop/shop" class="icon-item" >
+      <view class="icon-icon" 
+      style="background-image: -webkit-linear-gradient(bottom, #DB4EFF,#E482FF);"
+      >
+        <label class="iconfont iconfushi" ></label>
+      </view>
+      <label>
+        服饰
+      </label>
+    </navigator>
+    <navigator url="/pages/shop/shop" class="icon-item" >
+      <view class="icon-icon" 
+      style="background-image: -webkit-linear-gradient(bottom, #292DDF,#6BADE8);"
+      >
+        <label class="iconfont iconqiche" ></label>
+      </view>
+      <label>
+        汽车
+      </label>
+    </navigator>
+    <navigator url="/pages/shop/shop" class="icon-item" >
+      <view class="icon-icon" 
+      style="background-image: -webkit-linear-gradient(bottom, #00BF1A,#75FF86);"
+      >
+        <label class="iconfont iconfenzu" ></label>
+      </view>
+      <label>
+        美食
+      </label>
+    </navigator>
+  </view>
+  <!-- 图标列表 end -->
+
+  <!-- 猜你喜欢 start -->
+  <view class="likes base-shadow" >
+    <view class="like-header" >
+      <label>猜你喜欢</label>
+    </view>
+    <scroll-view class="scroll-header" scroll-x="true" >
+      <view class="like-item" wx:for="{{likes}}"  wx:key="*this" >
+        <view class="like-good" >
+          <image mode="aspectFill" src="../../assets/imgs/good{{index+1}}.jpg" ></image>
+          <text>{{item.name}}</text>
+          <label>¥{{item.price}}</label>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 猜你喜欢 end -->
 </view>

@@ -1,21 +1,161 @@
 /**index.wxss**/
-.userinfo {
+.indexPage{
+  min-height: 100vh;
+  background: #f2f2f2;
+}
+.header1{
+  width: 100vw;
+  height: 100rpx;
+  background: linear-gradient(0deg,#FFE300,#FFAE01);
+}
+.header{
+  width: 100vw;
+  height: 85rpx;
+  background: #FFE300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  position: relative;
+}
+.leftWords{
+  width: 100rpx;
+  text-align: center;
+}
+.mineIcon{
+  width: 100rpx;
+  height: 85rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .icon04f{
+  font-size: 48rpx;
+  color: #333333;
+}
+.searchInt{
+  border: 2rpx solid #d8cb5e;
+  width: 549rpx;
+  height: 52rpx;
+  border-radius: 26rpx;
+  padding-left: 40rpx;
+  font-size: 28rpx;
+}
+.toSearch{
+  width: 258rpx;
+  height: 52rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.toSearch>.iconsousuo{
+  font-size: 36rpx;
+  color: #666666;
+}
+.toSearch>.pholder{
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.banner{
+  height: 358rpx;
+  width: 100vw;
+}
+.banner>swiper{
+  height: 100%;
+}
+.banner image{
+  height: 358rpx;
+  width: 100vw;
+}
+
+.icons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 160rpx;
+  width: 100vw;
+  background: #fff;
+}
+.icon-item{
+  width: 25vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #333333;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.icon-icon{
+  width: 65rpx;
+  height: 65rpx;
+  border-radius: 37.5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-line-clamp: 2;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10rpx;
+}
+.icon-icon>.iconfont{
+  font-size: 58rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.likes{
+  margin-top: 30rpx;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx 0;
 }
-
-.usermotto {
-  margin-top: 200px;
+.like-header{
+  display: flex;
+}
+.like-header>label{
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+  margin-left: 25rpx;
+  color: #333333;  
+}
+.scroll-header{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+}
+.like-item{
+  width: 22.22vw;
+  display: inline-block;
+}
+.like-good{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333333;
+}
+.like-good>image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.like-good>text:nth-child(2)
+{
+  /* width: 20vw; */
+text-overflow:ellipsis;
+  word-wrap:break-word;
+}
+.like-good>label:last-child
+{
+  font-weight: bold;
 }
