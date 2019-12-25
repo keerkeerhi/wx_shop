@@ -1,0 +1,21 @@
+<!--component/header/header.wxml-->
+<view style='height:{{statusBarHeight+titleBarHeight}}px' >
+  <view class='header' > 
+    <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+    <view class="title-bar" style="height:{{titleBarHeight}}px">
+      <view class='back-btn' >
+        <view class="title_icon"  >
+          <navigator class='backBtn' open-type='navigateBack' >
+            <label wx:if="{{showBack}}" class='iconfont icon-fanhui' ></label>
+          </navigator>
+          <view wx:if="{{showHome&&showBack}}" class="icon_line"></view>
+          <view class='homeBtn' catchtap='toIndex' open-type='redirect' >
+            <label class='iconfont icon-shouye' wx:if="{{showHome}}" ></label>
+          </view>
+        </view>
+      </view>
+      <view>{{title}}</view>
+      <view class="tablet"></view>
+    </view>
+  </view>
+</view>

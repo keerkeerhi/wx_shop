@@ -1,35 +1,127 @@
 //app.js
+import indexsev from '/service/indexsev.js'
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
+    this.initUtil()
+    // 展示本地存储能力
+    let { query } = options
+    if (query.code) {
+      // this.globalData.code = query.code
+      wx.setStorageSync('inviteother', query.code)
+    }
     
+    //this.loginFun()
+    
+    // topHeight  device
+    this.hObj = { 'ipx': 88, 'android': 45, 'ipn': 65 }
+    // 判断设备是否为 iPhone X
+    this.checkDevice()
+  },
+  onShow() {
+    this.checkUpdate()
+  },
+  loginFun() {
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
+        let params = {
+          code: res.code,
+          invite: wx.getStorageSync('inviteother'),
         }
+        indexsev.login(params).then(res => {
+          console.log('logback', res)
+          let data = res.data
+          // res.data.openid = 'oRfhJ5ORN6HrNJNdziQVGd7DM5HQ'
+          this.globalData.loginInfo = data
+          if (this.globalData.backFun)
+            this.globalData.backFun()
+          wx.setStorageSync('invite', data.share_code)
+        })
       }
     })
   },
   globalData: {
     userInfo: null
+  },
+  initUtil() {
+    // padStart()方法的polyfill
+    if (!String.prototype.padStart) {
+      String.prototype.padStart = function (targetLength, padString) {
+        // 截断数字或将非数字转换为0
+        targetLength = targetLength >> 0;
+        padString = String((typeof padString !== 'undefined' ? padString : ' '))
+        if (this.length > targetLength || padString === '') {
+          return String(this);
+        }
+        targetLength = targetLength - this.length;
+        if (targetLength > padString.length) {
+          // 添加到初始值以确保长度足够
+          padString += padString.repeat(targetLength / padString.length);
+        }
+        return padString.slice(0, targetLength) + String(this);
+      };
+    }
+  },
+  // getSystemInfo 貌似是同步方法，
+  // 因为它总是在其他页面onLoad之前已经返回
+  checkDevice: function () {
+    const self = this
+    wx.getSystemInfo({
+      success: function (res) {
+        let { screenWidth, screenHeight, platform, model, statusBarHeight, } = res;
+        self.globalData.screenWidth = screenWidth
+        self.globalData.screenHeight = screenHeight
+        let totalTopHeight = 68
+        if (platform == 'android') {
+          self.globalData.topHeight = self.hObj['android']
+          self.globalData.device = 'android'
+        }
+        else {
+          totalTopHeight = 64
+          self.globalData.topHeight = self.hObj['ipn']
+          self.globalData.device = 'ipn'
+        }
+
+        // 根据 model 进行判断
+        if (model.search('iPhone X') != -1) {
+          self.globalData.topHeight = self.hObj['ipx']
+          self.globalData.bottomM = 34
+          self.globalData.device = 'ipx'
+          totalTopHeight = 88
+        }
+        self.config.statusBarHeight = statusBarHeight
+        self.config.titleBarHeight = totalTopHeight - statusBarHeight
+      }
+    })
+  },
+  config: {
+    // 自定义header ↓
+    titleBarHeight: 0,
+    statusBarHeight: 0
+    // 自定义header ↑
+  },
+  checkUpdate() {
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      console.log('versionBack==>', res.hasUpdate)
+    })
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+
+    })
+
+    updateManager.onUpdateFailed(function () {
+      // 新的版本下载失败
+    })
   }
 })

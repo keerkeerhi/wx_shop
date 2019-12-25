@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="indexPage">
-  <view class="header1"></view>
+  <header title="首页"></header>
   <view class="header">
     <view class="leftWords" >
       安阳
@@ -86,11 +86,36 @@
       <view class="like-item" wx:for="{{likes}}"  wx:key="*this" >
         <view class="like-good" >
           <image mode="aspectFill" src="../../assets/imgs/good{{index+1}}.jpg" ></image>
-          <text>{{item.name}}</text>
-          <label>¥{{item.price}}</label>
+          <label class="itemname" >{{item.name}}</label>
+          <view class="priceItem" >
+            <label>¥{{item.price}}</label>
+            <view class="toCar" >
+              <label class="iconfont icongouwuche" ></label>
+            </view>
+          </view>
         </view>
       </view>
     </scroll-view>
   </view>
   <!-- 猜你喜欢 end -->
+
+  <view class="good-list base-shadow" >
+    <view class="list-header" >
+      今日推荐
+    </view>
+    <view wx:for="{{likes}}" wx:key="*this" class="good-item" >
+      <image src="../../assets/imgs/good{{index+1}}.jpg"
+       mode="aspectFill" class="good-img" ></image>
+      <view class="good-right" >
+        <label class="good-tit" >波司登儿童羽绒服</label>
+        <label class="good-mark" >原价199元打折出售名牌羽绒服</label>
+        <view class="good-price" >
+          <label class="price-price" >¥{{item.price}}</label>
+          <view class="good-icon" >
+            <label class="iconfont icongouwuche" ></label>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

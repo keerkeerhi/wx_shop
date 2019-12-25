@@ -1,0 +1,59 @@
+<!--pages/goods/goods.wxml-->
+<header title="商品详情"></header>
+<!-- banner start -->
+<view class="good-banner" >
+    <swiper indicator-dots="true"
+      autoplay="true" >
+      <block wx:for="{{imgs}}" wx:key="*this">
+        <swiper-item>
+          <image mode="aspectFill" src="../../assets/imgs/banner{{index+1}}.png" ></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    
+    <view class="good-price" >
+      <label>{{goods.title}}</label>
+      <label>¥ {{goods.price}}</label>
+    </view>
+
+    <view class="good-info bottom-shadow" >
+      <view class="shop-tit" >
+        <image mode="aspectFill" src="../../assets/imgs/banner2.png" ></image>
+        <label>东北大饭店</label>
+      </view>
+      <view class="shop-in" >
+        <label>进入店铺</label>
+        <label class="iconfont iconqianjin"></label>
+      </view>
+    </view>
+
+    <view class="goods-cont base-shadow" >
+      <view class="cont-head" >
+        <label>商品描述</label>
+      </view>
+      <view class="cont-detail">
+        <text>巫山烤全鱼，味道鲜美，美味可口，是您外出品尝美食的完美选择。就卡死的房间卡速度来房间卡士大夫
+</text>
+        <image class="detail-imgs"  wx:for="imgs" wx:key="*this" 
+        mode="aspectFill" src="../../assets/imgs/good{{index+1}}.jpg" ></image>
+      </view>
+    </view>
+
+    <view class="buypanel base-shadow" >
+      <view class="buycar" >
+        <view class="caricon" >
+          <label class="iconfont icongouwuche" ></label>
+          <view class="cartip" >5</view>
+        </view>
+      </view>
+      <view class="buybtns" >
+        <view class="carbtn" >
+          <label>加入购物车</label>
+        </view>
+        <view class="buybtn" >
+          <label>立即购买</label>
+        </view>
+      </view>
+    </view>
+</view>
+  <!-- banner end -->
