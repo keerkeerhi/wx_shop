@@ -21,10 +21,10 @@
         <image mode="aspectFill" src="../../assets/imgs/banner2.png" ></image>
         <label>东北大饭店</label>
       </view>
-      <view class="shop-in" >
+      <navigator url="/pages/shop/shop" class="shop-in" >
         <label>进入店铺</label>
         <label class="iconfont iconqianjin"></label>
-      </view>
+      </navigator>
     </view>
 
     <view class="goods-cont base-shadow" >

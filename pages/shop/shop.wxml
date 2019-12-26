@@ -1,3 +1,24 @@
 <!--pages/shop/shop.wxml-->
-<header title="商铺列表"></header>
-<text>pages/shop/shop.wxml</text>
+<header title="商铺首页"></header>
+<view class="foodTit base-shadow" >
+  <view class="shoptitle" >
+    鸭脖王
+  </view>
+  <view class="sendWords" >
+    配送约30分钟
+  </view>
+  <view class="shopnotice" >
+    店铺公告：亲爱的顾客订餐请在早上9:00到晚上6:00之间。
+  </view>
+</view>
+
+<view class="shopcont" >
+  <van-sidebar custom-class="item-test" active-key="{{ activeKey }}" bind:change="onChange">
+    <van-sidebar-item title="标签名称" />
+    <van-sidebar-item title="标签名称" />
+    <van-sidebar-item title="标签名称" />
+  </van-sidebar>
+  <view class="goodlist" >
+    
+  </view>
+</view>

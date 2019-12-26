@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/shop/shop",
     "pages/goods/goods",
     "pages/index/index",
     "pages/result/result",
     "pages/mine/mine",
-    "pages/shop/shop"
+    "pages/shoplist/shoplist"
   ],
   "window": {
     "navigationStyle": "custom",

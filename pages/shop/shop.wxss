@@ -1,1 +1,94 @@
 /* pages/shop/shop.wxss */
+page{
+  background: #fff;
+}
+.foodTit{
+  width: 710rpx;
+  margin-left: 20rpx;
+  /* background: linear-gradient(0deg,rgba(0,167,22,.5) 0,rgba(0,167,22,.7) 10%,rgba(0,167,22,1) 50%,rgba(0,167,22,.7) 90%,rgba(0,167,22,.5)); */
+  background: rgba(0,167,22,1);
+  height: 225rpx;
+  margin-top: 28rpx;
+  border-radius: 6rpx;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.shoptitle{
+  font-family: '微软雅黑';
+  margin-top: 30rpx;
+  letter-spacing: 10rpx;
+  font-size: 60rpx;
+  text-align: center;
+  -webkit-animation: Glow 1.5s ease infinite alternate;
+  animation: Glow 1.5s ease infinite alternate;
+}
+
+@-webkit-keyframes Glow {
+    from {
+        text-shadow: 0 0 10px #fff,
+                     0 0 20px #fff,
+                     0 0 30px #fff,
+                     0 0 40px #FFE300,
+                     0 0 70px #FFE300,
+                     0 0 80px #FFE300,
+                     0 0 100px #FFE300,
+                     0 0 150px #FFE300;
+    }
+    to {
+        text-shadow: 0 0 5px #fff,
+                     0 0 10px #fff,
+                     0 0 15px #fff,
+                     0 0 20px #FFE300,
+                     0 0 35px #FFE300,
+                     0 0 40px #FFE300,
+                     0 0 50px #FFE300,
+                     0 0 75px #FFE300;
+    }
+}
+@keyframes Glow {
+    from {
+        text-shadow: 0 0 10px #fff,
+                     0 0 20px #fff,
+                     0 0 30px #fff,
+                     0 0 40px #FFE300,
+                     0 0 70px #FFE300,
+                     0 0 80px #FFE300,
+                     0 0 100px #FFE300,
+                     0 0 150px #FFE300;
+    }
+    to {
+        text-shadow: 0 0 5px #fff,
+                     0 0 10px #fff,
+                     0 0 15px #fff,
+                     0 0 20px #FFE300,
+                     0 0 35px #FFE300,
+                     0 0 40px #FFE300,
+                     0 0 50px #FFE300,
+                     0 0 75px #FFE300;
+    }
+}
+
+.sendWords{
+  margin-top: 15rpx;
+  font-size: 24rpx;
+  margin-left: 25rpx;
+}
+.shopnotice{
+  font-size: 24rpx;
+  margin-left: 25rpx;
+}
+.shopcont{
+  margin-top: 28rpx;
+  position: relative;
+}
+
+.goodlist
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 580rpx;
+  min-height: 100%;
+  background: red;
+}
