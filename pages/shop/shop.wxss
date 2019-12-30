@@ -88,7 +88,99 @@ page{
   position: absolute;
   top: 0;
   right: 0;
-  width: 580rpx;
+  width: calc(100vw - 85px);
   min-height: 100%;
-  background: red;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
+.goodItem{
+  width: calc(50vw - 52.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+.goodItem>image{
+  border-radius: 6rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+.good-tit{
+  margin-top: 15rpx;
+  font-size: 24rpx;
+  width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pricecar{
+  margin-top: 15rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.pricecar>label{
+  color: #e50d3a;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+.putCar{
+  position: absolute;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #c8c8c8;
+}
+.putCar>.iconfont{
+  color: #e50d3a;
+  font-size: 30rpx;
+}
+
+/* ===============购物车入口 start */
+.carTip{
+  border-radius: 40rpx;
+  position: fixed;
+  bottom: 16rpx;
+  width: 317rpx;
+  height: 80rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #ffe300;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.h-line{
+  height: 50rpx;
+  width: 1px;
+  background: #333;
+}
+.tip-item{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 105rpx;
+}
+.tip-item>.iconfont{
+  font-size: 49rpx;
+}
+.home-item{
+  border-top-left-radius: 40rpx;
+  border-bottom-left-radius: 40rpx;
+}
+.services{
+  border-top-right-radius: 40rpx;
+  border-bottom-right-radius: 40rpx;
+}
+/* ===============购物车入口 end */

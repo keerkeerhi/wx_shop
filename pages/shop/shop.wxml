@@ -19,6 +19,29 @@
     <van-sidebar-item title="标签名称" />
   </van-sidebar>
   <view class="goodlist" >
-    
+    <navigator url="/pages/goods/goods" wx:for="{{goods}}" wx:key="*this" class="goodItem" >
+      <image mode="aspectFill" src="../../assets/imgs/banner{{index%2+1}}.png" ></image>
+      <label class="good-tit" >{{item.title}}asdfasdfasdfasdfasd</label>
+      <view catchtap="toCar" class="pricecar" >
+        <label>¥{{item.price}}</label>
+        <view class="putCar" >
+          <label class="iconfont icongouwuche" ></label>
+        </view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class="carTip base-shadow" >
+    <navigator class="tip-item home-item"  url="/pages/index/index" >
+      <label class="iconfont iconhome" ></label>
+    </navigator>
+    <view class="h-line" ></view>
+    <view class="tip-item" bindtap="showCar" >
+      <label class="iconfont icongouwuche" ></label>
+    </view>
+    <view class="h-line" ></view>
+    <view class="tip-item services" >
+      <label class="iconfont iconkefu" ></label>
+    </view>
   </view>
 </view>
