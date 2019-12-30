@@ -44,4 +44,70 @@
       <label class="iconfont iconkefu" ></label>
     </view>
   </view>
+
+  <van-popup show="{{ show }}"
+  position="bottom" closeable
+  bind:close="onClose">
+    <view class="model-cont" >
+      <view class="car-top" >
+        <label>购物车</label>
+      </view>
+    
+        <!-- 单个商铺 start -->
+        <view wx:for="{{shops}}" 
+          wx:key="*this" 
+          class="shop-goods" >
+          <view class="shop-title" >
+            <van-checkbox
+            custom-class="car-check"
+            value="{{ item.checked }}" 
+            data-isParent="1"
+            bind:change="onChange" ></van-checkbox>
+            <navigator url="/pages/shop/shop" class="tit-nav" >
+              <label class="iconfont iconshangpu" ></label>
+              <label>{{item.title}}</label>
+              <label class="iconfont iconqianjin" ></label>
+            </navigator>
+          </view>
+          <view class="good-list base-shadow" >
+            <view class="good-item" 
+            wx:for="{{item.goods}}" wx:for-item="good"
+            wx:key="*this" >
+              <van-checkbox
+              custom-class="car-check2"
+              value="{{ good.checked }}" 
+              data-isParent="1"
+              bind:change="onChange" ></van-checkbox>
+              <image mode="aspectFill" 
+              src="../../assets/imgs/banner1.png" 
+              ></image>
+              <view class="good-cont" >
+                <label>{{good.title}}</label>
+                <view class="good-price" >
+                  <label>¥{{good.price}}</label>
+                  <van-stepper value="{{ good.num }}"
+                  bind:change="onChange" />
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 单个商铺 end -->
+
+        <view class="car-oper" >
+          <view class="car-info" >
+            <van-checkbox
+              custom-class="car-check"
+              value="{{ item.checked }}" 
+              data-isParent="1"
+              bind:change="onChange" >全选</van-checkbox>
+            <label class="tollab">合计：</label>
+            <label class="money">¥ 245</label>
+          </view>
+          <view class="carbtn" >
+            <label>结算</label>
+          </view>
+        </view>
+    </view>
+  </van-popup>
 </view>
