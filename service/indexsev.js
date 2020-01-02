@@ -2,7 +2,7 @@ import {base_url} from './baseconfig.js'
 
 // -------------基本接口
 // 登录操作
-const login_url = base_url + 'base/login/';
+const login_url = base_url + 'xuser-info/';
 // 上传图片
 const upload_file = base_url + 'base/upload_file/'
 

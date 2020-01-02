@@ -10,7 +10,7 @@ App({
       wx.setStorageSync('inviteother', query.code)
     }
     
-    //this.loginFun()
+    this.loginFun()
     
     // topHeight  device
     this.hObj = { 'ipx': 88, 'android': 45, 'ipn': 65 }
@@ -26,7 +26,7 @@ App({
       success: res => {
         let params = {
           code: res.code,
-          invite: wx.getStorageSync('inviteother'),
+          // invite: wx.getStorageSync('inviteother'),
         }
         indexsev.login(params).then(res => {
           console.log('logback', res)
