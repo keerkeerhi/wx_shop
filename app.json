@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/begin/beign",
+    "pages/index/index",
     "pages/shop/shop",
     "pages/goods/goods",
-    "pages/index/index",
     "pages/result/result",
     "pages/mine/mine",
     "pages/shoplist/shoplist"
@@ -11,6 +11,11 @@
   "window": {
     "navigationStyle": "custom",
     "backgroundTextStyle": "light"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

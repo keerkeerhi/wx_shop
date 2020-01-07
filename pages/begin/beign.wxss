@@ -3,9 +3,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 .good-icon{
-  
+  margin-top: 15vh;
+}
+
+.aubtn{
+  border: none;
+  background: #FF7D00;
+  height: 88rpx;
+  color: #fff;
+  font-size: 32rpx;
+  margin-top: 15vh;
+  margin-bottom: 76rpx;
+  width: 85vw;
+  outline: none;
 }

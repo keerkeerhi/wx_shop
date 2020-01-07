@@ -1,5 +1,6 @@
 <!--pages/begin/beign.wxml-->
 <view class="beginPage" >
-  <van-icon class="good-icon" size="40" color="#55DA00" name="smile-o" />
-  <van-button type="primary" bind:click="uBack" block>进入金鱼街</van-button>
+  <van-icon class="good-icon" size="100" color="#55DA00" name="smile-o" />
+  <button class="aubtn base-shadow" open-type='getUserInfo' bindgetuserinfo="userBack"
+         >进入金鱼街</button>
 </view>

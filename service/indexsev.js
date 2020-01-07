@@ -5,6 +5,8 @@ import {base_url} from './baseconfig.js'
 const login_url = base_url + 'xuser-info/';
 // 上传图片
 const upload_file = base_url + 'base/upload_file/'
+// 更新用户信息
+const updateUser = base_url + 'decrypt/';
 
 module.exports = {
   login(data){
@@ -17,6 +19,21 @@ module.exports = {
           resolve(res.data)
         },
         fail(res){
+          reject(res)
+        }
+      })
+    })
+  },
+  updateUser(data){
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: updateUser,
+        method: "POST",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
           reject(res)
         }
       })

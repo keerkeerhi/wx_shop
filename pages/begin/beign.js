@@ -1,29 +1,75 @@
 // pages/begin/beign.js
+let app = getApp()
+import indexsev from '../../service/indexsev.js'
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+import { getMaxMinLongitudeLatitude } from '../../utils/util.js'
+
+var qqmapsdk;
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
-
-  },
-
+  data: {},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'I7SBZ-6WO6U-GI6VP-4BYNQ-GB4PK-THBKP'
+    });
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success(res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        let vm = this;
+        let info = getMaxMinLongitudeLatitude(longitude, latitude,5)
+        console.log('===info',info)
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude,
+            longitude
+          },
+          success: function (res) {
+            console.log('==>>address', res)
+            let district = res.result.ad_info.district
+            app.globalData.city = district;
+            wx.showToast({
+              title: district,
+            })
+          },
+          fail: function (res) {
+            console.log(res);
+          },
+          complete: function (res) {
+          }
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  uBack(e){
-    console.log('====e',e)
+  userBack(e) {
+    let _this = this;
+    let detail = e.detail
+    if (detail.errMsg.indexOf('ok') > -1) {
+      let sessionKey = app.globalData.session_key;
+      let { iv, encryptedData } = detail
+      console.log('-----info',detail)
+      indexsev.updateUser({ encryptedData, iv, sessionKey }).then(res => {
+        if (res.code==0)
+        {
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
+        }
+        else
+          wx.showToast({
+            title: '获取用户信息超时',
+            icon: 'none'
+          })
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -31,35 +77,6 @@ Page({
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

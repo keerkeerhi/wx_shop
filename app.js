@@ -21,6 +21,7 @@ App({
     this.checkUpdate()
   },
   loginFun() {
+    let _this = this
     // 登录
     wx.login({
       success: res => {
@@ -28,20 +29,36 @@ App({
           code: res.code,
           // invite: wx.getStorageSync('inviteother'),
         }
+        wx.showLoading({
+          title: '查询用户状态',
+        })
         indexsev.login(params).then(res => {
           console.log('logback', res)
-          let data = res.data
-          // res.data.openid = 'oRfhJ5ORN6HrNJNdziQVGd7DM5HQ'
-          this.globalData.loginInfo = data
-          if (this.globalData.backFun)
-            this.globalData.backFun()
-          wx.setStorageSync('invite', data.share_code)
+          wx.hideLoading();
+          if (res.code==0)
+          {
+            let { session_key, nickname, image, phone } = res.data;
+            this.globalData.session_key = session_key;
+            if (nickname) {
+              this.globalData.userInfo = { nickname, image, phone };
+              if (this.globalData.backFun)
+                this.globalData.backFun()
+            }
+          }
+          else
+            wx.showToast({
+              title: '获取用户信息超时',
+              icon:'none'
+            })
+          // wx.setStorageSync('invite', data.share_code)
         })
       }
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    session_key: null,
+    city: null
   },
   initUtil() {
     // padStart()方法的polyfill
