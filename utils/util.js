@@ -36,7 +36,20 @@ const getMaxMinLongitudeLatitude = (longitude, latitude, distince)=>{
   return { minlat, maxlat, minlng , maxlng};
 }
 
+const fPromise = fn => obj => {
+  return new Promise((resolve, reject) => {
+    obj.complete = obj.success = res => {
+      resolve(res)
+    }
+    obj.fail = err => {
+      reject(err)
+    }
+    fn(obj);
+  })
+}
+
 module.exports = {
   formatTime,
-  getMaxMinLongitudeLatitude
+  getMaxMinLongitudeLatitude,
+  fPromise
 }

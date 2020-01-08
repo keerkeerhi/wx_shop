@@ -225,7 +225,7 @@
 }
 .good-tit{
   font-weight: bold;
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: #333333;
 }
 .good-mark{
@@ -242,8 +242,9 @@
 .good-price{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 15rpx;
+  font-size: 28rpx;
 }
 .good-icon{
   width: 60rpx;

@@ -2,7 +2,8 @@
 let app = getApp()
 import indexsev from '../../service/indexsev.js'
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
-import { getMaxMinLongitudeLatitude } from '../../utils/util.js'
+import { getMaxMinLongitudeLatitude, fPromise } from '../../utils/util.js'
+import { getData ,putData} from '../../utils/pageManager.js'
 
 var qqmapsdk;
 Page({
@@ -15,39 +16,67 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 实例化API核心类
-    qqmapsdk = new QQMapWX({
-      key: 'I7SBZ-6WO6U-GI6VP-4BYNQ-GB4PK-THBKP'
-    });
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-      success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        let vm = this;
-        let info = getMaxMinLongitudeLatitude(longitude, latitude,5)
-        console.log('===info',info)
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude,
-            longitude
-          },
-          success: function (res) {
-            console.log('==>>address', res)
-            let district = res.result.ad_info.district
-            app.globalData.city = district;
-            wx.showToast({
-              title: district,
-            })
-          },
-          fail: function (res) {
-            console.log(res);
-          },
-          complete: function (res) {
-          }
+    getData("loginData").then(({ nickname, image, phone })=>{
+      if (nickname) {
+        wx.redirectTo({
+          url: '/pages/index/index',
         })
       }
     })
+    
+    putData("homePage",new Promise((home_res,home_rej)=>{
+      // 实例化API核心类
+      qqmapsdk = new QQMapWX({
+        key: 'I7SBZ-6WO6U-GI6VP-4BYNQ-GB4PK-THBKP'
+      });
+
+
+      wx.getLocation({
+        type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+        success(res) {
+          const latitude = res.latitude
+          const longitude = res.longitude
+          qqmapsdk.reverseGeocoder({
+            location: {
+              latitude,
+              longitude
+            },
+            success: function (res) {
+              console.log('==>>address', res)
+              let district = res.result.ad_info.district
+              app.globalData.city = district;
+              // wx.showToast({
+              //   title: district,
+              // })
+            },
+            fail: function (res) {
+              console.log(res);
+            },
+            complete: function (res) {
+            }
+          })
+          app.globalData.position = { longitude, latitude}
+          let { minlat, maxlat, minlng, maxlng} = 
+          getMaxMinLongitudeLatitude(longitude, latitude, 5);
+          console.log('===info')
+          indexsev.nearby_shop({ little_lat: minlat, big_lat:maxlat,
+            little_lon: minlng, big_lon:maxlng}).then(res=>{
+              console.log("=======near_back")
+            if (res.code==0)
+            {
+              home_res(res.data)
+            }
+            else
+              home_rej(1)
+          },rej=>{
+            home_rej(1)
+          })
+        }
+      })
+
+
+    }))
+    
   },
   userBack(e) {
     let _this = this;
@@ -70,12 +99,6 @@ Page({
           })
       })
     }
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
   /**
    * 用户点击右上角分享

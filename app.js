@@ -1,5 +1,7 @@
 //app.js
 import indexsev from '/service/indexsev.js'
+import { putData } from './utils/pageManager.js'
+
 App({
   onLaunch: function (options) {
     this.initUtil()
@@ -9,9 +11,7 @@ App({
       // this.globalData.code = query.code
       wx.setStorageSync('inviteother', query.code)
     }
-    
     this.loginFun()
-    
     // topHeight  device
     this.hObj = { 'ipx': 88, 'android': 45, 'ipn': 65 }
     // 判断设备是否为 iPhone X
@@ -22,43 +22,44 @@ App({
   },
   loginFun() {
     let _this = this
-    // 登录
-    wx.login({
-      success: res => {
-        let params = {
-          code: res.code,
-          // invite: wx.getStorageSync('inviteother'),
-        }
-        wx.showLoading({
-          title: '查询用户状态',
-        })
-        indexsev.login(params).then(res => {
-          console.log('logback', res)
-          wx.hideLoading();
-          if (res.code==0)
-          {
-            let { session_key, nickname, image, phone } = res.data;
-            this.globalData.session_key = session_key;
-            if (nickname) {
-              this.globalData.userInfo = { nickname, image, phone };
-              if (this.globalData.backFun)
-                this.globalData.backFun()
-            }
+    putData("loginData",new Promise((login_res,login_rej)=>{
+      // 登录
+      wx.login({
+        success: res => {
+          let params = {
+            code: res.code,
+            // invite: wx.getStorageSync('inviteother'),
           }
-          else
-            wx.showToast({
-              title: '获取用户信息超时',
-              icon:'none'
-            })
-          // wx.setStorageSync('invite', data.share_code)
-        })
-      }
-    })
+          wx.showLoading({
+            title: '查询用户状态',
+          })
+          indexsev.login(params).then(res => {
+            console.log('logback', res)
+            wx.hideLoading();
+            if (res.code == 0) {
+              let { session_key, nickname, image, phone } = res.data;
+              _this.globalData.session_key = session_key;
+              if (nickname) {
+                _this.globalData.userInfo = { nickname, image, phone };
+              }
+              login_res({ nickname, image, phone })
+            }
+            else
+              wx.showToast({
+                title: '获取用户信息超时',
+                icon: 'none'
+              })
+            // wx.setStorageSync('invite', data.share_code)
+          })
+        }
+      })
+    }))
   },
   globalData: {
     userInfo: null,
     session_key: null,
-    city: null
+    city: null,
+    position: null
   },
   initUtil() {
     // padStart()方法的polyfill

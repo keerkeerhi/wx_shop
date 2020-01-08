@@ -1,9 +1,10 @@
 <!--index.wxml-->
+<wxs module="dateFr" src="../../utils/distance.wxs"></wxs>
 <view class="indexPage">
   <header title="首页"></header>
   <view class="header">
     <view class="leftWords" >
-      安阳
+      {{position}}
     </view>
     <input class="searchInt"
     value="{{searchWords}}"
@@ -101,19 +102,20 @@
 
   <view class="good-list base-shadow" >
     <view class="list-header" >
-      今日推荐
+      附近的商铺
     </view>
-    <view wx:for="{{likes}}" wx:key="*this" class="good-item" >
-      <image src="../../assets/imgs/good{{index+1}}.jpg"
+    <view wx:for="{{nearBy}}" wx:key="*this" class="good-item" >
+      <image src="{{item.cover?item.cover:'../../assets/imgs/logo.png'}}"
        mode="aspectFill" class="good-img" ></image>
       <view class="good-right" >
-        <label class="good-tit" >波司登儿童羽绒服</label>
-        <label class="good-mark" >原价199元打折出售名牌羽绒服</label>
+        <label class="good-tit" >{{item.ShopName}}</label>
+        <label class="good-mark" >
+        距离{{dateFr.getGreatCircleDistance(thisPos.lat1,thisPos.lng1,item.lat,item.lon)}}
+        </label>
         <view class="good-price" >
-          <label class="price-price" >¥{{item.price}}</label>
-          <view class="good-icon" >
-            <label class="iconfont icongouwuche" ></label>
-          </view>
+          本月销售：
+          <label class="price-price" >{{item.MonthlySales}}</label>
+          次
         </view>
       </view>
     </view>
