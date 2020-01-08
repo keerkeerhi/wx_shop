@@ -1,7 +1,9 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import { getData,delData } from '../../utils/pageManager.js'
+import {putData ,getData,delData } from '../../utils/pageManager.js'
+import indexsev from '../../service/indexsev'
+
 Page({
   data: {
     position: '',
@@ -39,14 +41,20 @@ Page({
     this.setData({ position: app.globalData.city})
   },
   bindKeyInput(e) {
-    this.setData({
-      searchWords: e.detail.value
-    })
+    this.searchWords = e.detail.value
+    // this.setData({
+    //   searchWords: e.detail.value
+    // })
   },
   doSearch(){
     // todo 异步获取 ， 传searchWord 到搜索页面
+    console.log('---sw-->>',this.searchWords)
+    let { minlat, maxlat, minlng, maxlng} = app.globalData.range;
+    putData("search_data",indexsev.search({keywords:this.searchWords,
+      little_lat: minlat, big_lat:maxlat,
+      little_lon: minlng, big_lon:maxlng}));
     wx.navigateTo({
-      url: '/pages/result/result'
+      url: '/pages/result/result?searchWords='+
     })
   }
 })

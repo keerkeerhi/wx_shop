@@ -1,18 +1,32 @@
 // pages/result/result.js
+import {getData,delData} from '../../utils/pageManager'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    dataList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let _this = this;
+    getData("search_data").then(res=>{
+      if (res.code==0)
+      {
+        _this.setData({dataList:res.data})
+        delData("search_data")
+      }
+      else
+        wx.showToast({
+          title: '获取数据超时',
+          icon: 'none'
+        })
+    })
   },
 
   /**

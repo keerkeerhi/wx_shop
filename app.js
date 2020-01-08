@@ -59,7 +59,8 @@ App({
     userInfo: null,
     session_key: null,
     city: null,
-    position: null
+    position: null,
+    range: null
   },
   initUtil() {
     // padStart()方法的polyfill

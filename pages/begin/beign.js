@@ -11,7 +11,9 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    loading: true
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -21,6 +23,10 @@ Page({
         wx.redirectTo({
           url: '/pages/index/index',
         })
+      }
+      else
+      {
+        this.setData({loading:false})
       }
     })
     
@@ -58,6 +64,7 @@ Page({
           app.globalData.position = { longitude, latitude}
           let { minlat, maxlat, minlng, maxlng} = 
           getMaxMinLongitudeLatitude(longitude, latitude, 5);
+          app.globalData.range = { minlat, maxlat, minlng, maxlng};
           console.log('===info')
           indexsev.nearby_shop({ little_lat: minlat, big_lat:maxlat,
             little_lon: minlng, big_lon:maxlng}).then(res=>{

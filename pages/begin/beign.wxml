@@ -3,4 +3,11 @@
   <van-icon class="good-icon" size="100" color="#55DA00" name="smile-o" />
   <button class="aubtn base-shadow" open-type='getUserInfo' bindgetuserinfo="userBack"
          >进入金鱼街</button>
+  <view wx:if="{{loading}}" class='loading' >
+    <view class="loadView" >
+      <view class="inner one"></view>
+      <view class="inner two"></view>
+      <view class="inner three"></view>
+    </view>
+  </view>
 </view>
