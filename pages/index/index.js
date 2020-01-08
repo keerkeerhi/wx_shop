@@ -44,11 +44,9 @@ Page({
     })
   },
   doSearch(){
+    // todo 异步获取 ， 传searchWord 到搜索页面
     wx.navigateTo({
-      url: '/pages/result/result',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      url: '/pages/result/result'
     })
   }
 })
