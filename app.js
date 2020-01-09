@@ -1,7 +1,9 @@
 //app.js
 import indexsev from '/service/indexsev.js'
 import { putData } from './utils/pageManager.js'
-
+var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
+import { getMaxMinLongitudeLatitude } from './utils/util.js'
+var qqmapsdk;
 App({
   onLaunch: function (options) {
     this.initUtil()
@@ -12,10 +14,48 @@ App({
       wx.setStorageSync('inviteother', query.code)
     }
     this.loginFun()
+    this.initPos()
     // topHeight  device
     this.hObj = { 'ipx': 88, 'android': 45, 'ipn': 65 }
     // 判断设备是否为 iPhone X
     this.checkDevice()
+  },
+  initPos(){
+    let _this = this;
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'I7SBZ-6WO6U-GI6VP-4BYNQ-GB4PK-THBKP'
+    });
+    putData("posData", new Promise((pos_res, pos_rej) => {
+      wx.getLocation({
+        type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+        success(res) {
+          const latitude = res.latitude
+          const longitude = res.longitude
+          let { minlat, maxlat, minlng, maxlng } =
+            getMaxMinLongitudeLatitude(longitude, latitude, 5);
+          pos_res({ minlat, maxlat, minlng, maxlng, latitude, longitude })
+          
+          // 获取用户所在地
+          qqmapsdk.reverseGeocoder({
+            location: {
+              latitude,
+              longitude
+            },
+            success: function (res) {
+              let district = res.result.ad_info.district
+              _this.globalData.city = district;
+            },
+            fail: function (res) {
+              console.log(res);
+            },
+            complete: function (res) {}
+          })
+
+        }
+      })
+
+    }))
   },
   onShow() {
     this.checkUpdate()
@@ -37,12 +77,16 @@ App({
             console.log('logback', res)
             wx.hideLoading();
             if (res.code == 0) {
-              let { session_key, nickname, image, phone } = res.data;
+              let { unionid,session_key, nickname, image, phone } = res.data;
               _this.globalData.session_key = session_key;
+              // wx.setStorageSync("unionid", unionid)
+              // wx.setStorageSync("session_key", session_key)
+              // wx.setStorage({ key: 'unionid', data: unionid})
+              // wx.setStorage({ key: 'session_key', data: session_key })
               if (nickname) {
                 _this.globalData.userInfo = { nickname, image, phone };
               }
-              login_res({ nickname, image, phone })
+              login_res({ unionid, session_key, nickname, image, phone })
             }
             else
               wx.showToast({

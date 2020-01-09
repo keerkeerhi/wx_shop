@@ -3,21 +3,17 @@
 const app = getApp()
 import {putData ,getData,delData } from '../../utils/pageManager.js'
 import indexsev from '../../service/indexsev'
+import { img_url} from '../../service/baseconfig.js'
 
 Page({
   data: {
+    img_url,
     position: '',
     isFocus:false,
     searchWords: '',
     banners: [1,2,3],
     thisPos: {lat1:0,lng1:0},
-    likes:[
-      { name:'金鸽瓜子',price:6 },
-      { name: '可口可乐', price: 6 },
-      { name: '箭牌口香糖', price: 6 },
-      { name: '旺旺牛奶糖', price: 6 },
-      { name: '阿尔卑斯牛奶糖', price: 6 }
-    ],
+    likes:[],
     nearBy: []
   },
   //事件处理函数
@@ -27,20 +23,41 @@ Page({
   beNoFoc() {
     this.setData({ isFocus:false })
   },
+  toShop(e){
+    let { shopid } = e.currentTarget.dataset
+    putData("shopData", indexsev.shop_detail({'shop_id':shopid,pages:1}))
+    wx.navigateTo({
+      url: '/pages/shop/shop?shopId='+shopid,
+    })
+  },
   onLoad: function () {
-    console.log('------onLoad')
-    let pos = app.globalData.position
-    console.log('======>>',pos)
-    this.setData({ thisPos: { lat1: pos.latitude, lng1: pos.longitude}})
-    getData('homePage').then(res=>{
-      if (res)
-        this.setData({nearBy:res})
+    let _this = this;
+    getData('posData').then(({ latitude, longitude })=>{
+      this.setData({ thisPos: { lat1: latitude, lng1: longitude } })
+    })
+    getData('nearData').then(res=>{
+      console.log('====Homeback',res)
+      if (res.code==0)
+      {
+        delData("nearData")
+        this.setData({ nearBy: res.data })
+      }
     },rej=>{
       console.log('======homePage.rej',rej)
     })
+    getData('userLike').then(res=>{
+      if (res.code==0)
+      {
+        delData("userLike")
+        this.setData({ likes: res.data })
+      }
+    })
+
+    // todo 有可能获取不到city哦，是否处理
     this.setData({ position: app.globalData.city})
   },
   onShow(){
+    console.log('=====onShow')
     this.setData({ searchWords: ''})
   },
   bindKeyInput(e) {

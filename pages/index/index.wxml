@@ -2,22 +2,24 @@
 <wxs module="dateFr" src="../../utils/distance.wxs"></wxs>
 <view class="indexPage">
   <header title="首页"></header>
-  <view class="header">
-    <view class="leftWords" >
-      {{position}}
-    </view>
-    <input class="searchInt"
-    value="{{searchWords}}"
-    bindinput="bindKeyInput"
-    bindfocus="beFocus" 
-    bindconfirm="doSearch"
-    bindblur="beNoFoc" ></input>
-    <navigator url="/pages/mine/mine" class="mineIcon" >
-      <label class="iconfont icon04f" ></label>
-    </navigator>
-    <view wx:if="{{!isFocus&&!searchWords}}" class="toSearch">
-      <label class="iconfont iconsousuo" ></label>
-      <label class="pholder" >搜索商品或商铺</label>
+  <view class="head-con" >
+    <view class="header">
+      <view class="leftWords" >
+        {{position}}
+      </view>
+      <input class="searchInt"
+      value="{{searchWords}}"
+      bindinput="bindKeyInput"
+      bindfocus="beFocus" 
+      bindconfirm="doSearch"
+      bindblur="beNoFoc" ></input>
+      <navigator url="/pages/mine/mine" class="mineIcon" >
+        <label class="iconfont icon04f" ></label>
+      </navigator>
+      <view wx:if="{{!isFocus&&!searchWords}}" class="toSearch">
+        <label class="iconfont iconsousuo" ></label>
+        <label class="pholder" >搜索商品或商铺</label>
+      </view>
     </view>
   </view>
 
@@ -104,8 +106,9 @@
     <view class="list-header" >
       附近的商铺
     </view>
-    <view wx:for="{{nearBy}}" wx:key="*this" class="good-item" >
-      <image src="{{item.cover?item.cover:'../../assets/imgs/logo.png'}}"
+    <navigator bindtap="toShop" data-shopId="{{item.id}}" 
+    wx:for="{{nearBy}}" wx:key="*this" class="good-item" >
+      <image src="{{item.cover?(img_url+item.cover):'../../assets/imgs/logo.png'}}"
        mode="aspectFill" class="good-img" ></image>
       <view class="good-right" >
         <label class="good-tit" >{{item.ShopName}}</label>
@@ -118,6 +121,6 @@
           次
         </view>
       </view>
-    </view>
+    </navigator>
   </view>
 </view>

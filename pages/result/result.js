@@ -10,7 +10,8 @@ Page({
   data: {
     dataList:[],
     searchWords:"",
-    position: ''
+    position: '',
+    thisPos: { lat1: 0, lng1: 0 }
   },
 
   /**
@@ -18,7 +19,10 @@ Page({
    */
   onLoad: function (options) {
     let {searchWords} = options;
-    this.setData({ searchWords, position: app.globalData.city })
+    let { position, city } = app.globalData
+    this.setData({ thisPos: { lat1: position.latitude, lng1: position.longitude } })
+    this.setData({ searchWords, position: city })
+    this.searchWords = searchWords
     let _this = this;
     getData("search_data").then(res=>{
       if (res.code==0)

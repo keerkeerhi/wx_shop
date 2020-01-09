@@ -1,4 +1,7 @@
 /* pages/result/result.wxss */
+.head-con{
+  height: 85rpx;
+}
 .header{
   width: 100vw;
   height: 85rpx;
@@ -7,7 +10,8 @@
   flex-direction: row;
   align-items: center;
   font-size: 28rpx;
-  position: relative;
+  position: fixed;
+  z-index: 9999;
 }
 .leftWords{
   width: 100rpx;

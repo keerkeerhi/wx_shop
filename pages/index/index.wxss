@@ -8,6 +8,9 @@
   height: 100rpx;
   background: linear-gradient(0deg,#FFE300,#FFAE01);
 }
+.head-con{
+  height: 85rpx;
+}
 .header{
   width: 100vw;
   height: 85rpx;
@@ -16,7 +19,8 @@
   flex-direction: row;
   align-items: center;
   font-size: 28rpx;
-  position: relative;
+  position: fixed;
+  z-index: 9999;
 }
 .leftWords{
   width: 100rpx;
@@ -200,8 +204,7 @@
   margin-top: 30rpx;
 }
 .good-item{
-  margin-left: 20rpx;
-  width: 710rpx;
+  /* width: 710rpx; */
   min-height: 200rpx;
   border-bottom: 1px solid #eaeaea;
   display: flex;
@@ -209,6 +212,7 @@
   align-items: center;
 }
 .good-img{
+  margin-left: 20rpx;
   width: 150rpx;
   height: 150rpx;
   margin-right: 20rpx;
@@ -245,6 +249,7 @@
   justify-content: flex-end;
   margin-top: 15rpx;
   font-size: 28rpx;
+  padding-right: 20rpx;
 }
 .good-icon{
   width: 60rpx;

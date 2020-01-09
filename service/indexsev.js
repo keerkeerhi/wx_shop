@@ -28,8 +28,42 @@ const my_order = base_url + 'my-order/'
 const nearby_shop = base_url + 'nearby-shop/'
 // 搜索
 const search = base_url + 'search/'
+// 猜你喜欢
+const user_like = base_url + 'user-like/'
+// 店铺详情
+const shop_detail = base_url + 'shop-details/'
 
 module.exports = {
+  shop_detail(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: shop_detail,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  user_like(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: user_like,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
   search(data) {
     return new Promise((resolve, reject) => {
       wx.request({

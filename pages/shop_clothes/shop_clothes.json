@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "header": "/component/header/header",
+    "van-sidebar": "@vant/weapp/sidebar",
+    "van-sidebar-item": "@vant/weapp/sidebar-item",
+    "van-popup": "@vant/weapp/popup",
+    "van-checkbox": "@vant/weapp/checkbox",
+    "van-stepper": "@vant/weapp/stepper"
+  }
+}

@@ -6,7 +6,8 @@
     "pages/goods/goods",
     "pages/result/result",
     "pages/mine/mine",
-    "pages/shoplist/shoplist"
+    "pages/shoplist/shoplist",
+    "pages/shop_clothes/shop_clothes"
   ],
   "window": {
     "navigationStyle": "custom",

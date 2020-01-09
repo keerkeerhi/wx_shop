@@ -1,5 +1,5 @@
 // pages/shop/shop.js
-import { getData, putData,delData} from '../../utils/pageManager.js'
+import { getData, putData, delData } from '../../utils/pageManager.js'
 let app = getApp();
 import indexsev from '../../service/indexsev.js'
 Page({
@@ -9,17 +9,43 @@ Page({
    */
   data: {
     activeKey: 0,
-    shop_details:{},
-    goods:[],
+    shop_details: {},
+    goods: [
+      {
+        title: '营养快线',
+        price: 11
+      },
+      {
+        title: '营养快线',
+        price: 11
+      },
+      {
+        title: '营养快线',
+        price: 11
+      },
+      {
+        title: '营养快线',
+        price: 11
+      },
+      {
+        title: '营养快线',
+        price: 11
+      },
+      {
+        title: '营养快线',
+        price: 11
+      }
+    ],
     // 购物车相关 start
     show: true,
     shops: [
-      {id:1,title:'海阔天空店',
-      goods:[
-        {title:'天空',img:"",price:20,num:2,checked:false},
-        { title: '海阔', img: "", price: 21, num: 1,checked:false }
-      ],
-      checked:false
+      {
+        id: 1, title: '海阔天空店',
+        goods: [
+          { title: '天空', img: "", price: 20, num: 2, checked: false },
+          { title: '海阔', img: "", price: 21, num: 1, checked: false }
+        ],
+        checked: false
       },
       {
         id: 2, title: '天空海阔店',
@@ -32,7 +58,7 @@ Page({
     ]
     // 购物车相关 end
   },
-  initHome(){
+  initHome() {
     let _this = this
     getData('posData').then(({ minlat, maxlat, minlng, maxlng }) => {
       // 初始化首页数据
@@ -54,16 +80,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let {shopId} = options
-    getData("shopData").then(res=>{
-      if (res.code==0)
-      {
-        let { shop_details, shop_commodity} = res.data
-        this.setData({shop_details})
+    let { shopId } = options
+    getData("shopData").then(res => {
+      if (res.code == 0) {
+        let { shop_details, shop_commodity } = res.data
+        this.setData({ shop_details })
         delData("shopData")
       }
-      else
-      {
+      else {
         wx.showToast({
           title: '获取店铺详情超时',
           icon: 'none'
@@ -71,8 +95,8 @@ Page({
       }
     })
   },
-  toCar(e){
-    console.log('----catch',e)
+  toCar(e) {
+    console.log('----catch', e)
   },
   onChange(event) {
     wx.showToast({
@@ -82,16 +106,16 @@ Page({
   },
   showCar(e) {
     let show = this.data.show;
-    this.setData({ show: true})
+    this.setData({ show: true })
   },
-  onClose(e){
-    this.setData({show:false})
+  onClose(e) {
+    this.setData({ show: false })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
