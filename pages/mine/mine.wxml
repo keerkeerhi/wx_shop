@@ -1,2 +1,3 @@
 <!--pages/mine/mine.wxml-->
+<header title="我的"></header>
 <text>pages/mine/mine.wxml</text>

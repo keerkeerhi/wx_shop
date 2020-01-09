@@ -1,19 +1,24 @@
 // pages/result/result.js
 import {getData,delData} from '../../utils/pageManager'
-
+let app = getApp()
+import indexsev from '../../service/indexsev.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    dataList:[]
+    dataList:[],
+    searchWords:"",
+    position: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let {searchWords} = options;
+    this.setData({ searchWords, position: app.globalData.city })
     let _this = this;
     getData("search_data").then(res=>{
       if (res.code==0)
@@ -28,32 +33,35 @@ Page({
         })
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindKeyInput(e) {
+    let s = e.detail.value
+    this.setData({ searchWords: s});
+    this.searchWords = s;
   },
-
+  doSearch() {
+    // todo 异步获取 ， 传searchWord 到搜索页面
+    console.log('---sw-->>', this.searchWords)
+    let { minlat, maxlat, minlng, maxlng } = app.globalData.range;
+    let _this = this;
+    indexsev.search({
+      keyword: this.searchWords,
+      little_lat: minlat, big_lat: maxlat,
+      little_lon: minlng, big_lon: maxlng
+    }).then(res=>{
+      if (res.code == 0) {
+        _this.setData({ dataList: res.data })
+      }
+      else
+        wx.showToast({
+          title: '获取数据超时',
+          icon: 'none'
+        })
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
 
   },
 

@@ -40,6 +40,9 @@ Page({
     })
     this.setData({ position: app.globalData.city})
   },
+  onShow(){
+    this.setData({ searchWords: ''})
+  },
   bindKeyInput(e) {
     this.searchWords = e.detail.value
     // this.setData({
@@ -50,11 +53,11 @@ Page({
     // todo 异步获取 ， 传searchWord 到搜索页面
     console.log('---sw-->>',this.searchWords)
     let { minlat, maxlat, minlng, maxlng} = app.globalData.range;
-    putData("search_data",indexsev.search({keywords:this.searchWords,
+    putData("search_data",indexsev.search({keyword:this.searchWords,
       little_lat: minlat, big_lat:maxlat,
       little_lon: minlng, big_lon:maxlng}));
     wx.navigateTo({
-      url: '/pages/result/result?searchWords='+
+      url: '/pages/result/result?searchWords=' + this.searchWords
     })
   }
 })

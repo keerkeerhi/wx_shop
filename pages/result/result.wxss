@@ -1,1 +1,98 @@
 /* pages/result/result.wxss */
+.header{
+  width: 100vw;
+  height: 85rpx;
+  background: #FFE300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  position: relative;
+}
+.leftWords{
+  width: 100rpx;
+  text-align: center;
+}
+.mineIcon{
+  width: 100rpx;
+  height: 85rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mineIcon:active{
+  background: #CDB500;
+}
+.mineIcon>label{
+  font-size: 48rpx;
+  color: #333333;
+}
+.searchInt{
+  border: 2rpx solid #d8cb5e;
+  width: 549rpx;
+  height: 52rpx;
+  border-radius: 26rpx;
+  padding-left: 40rpx;
+  font-size: 28rpx;
+}
+
+.good-list{
+  background: #fff;
+}
+.good-list>.good-item:not(:first-child){
+  border-top: 1px solid #eaeaea;
+}
+.good-item{
+  margin-left: 20rpx;
+  width: 710rpx;
+  min-height: 200rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.good-img{
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 20rpx;
+}
+.good-tit{
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333333;
+}
+.good-mark{
+  margin-top: 15rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.good-right{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.good-price{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 15rpx;
+  font-size: 28rpx;
+}
+.good-icon{
+  width: 60rpx;
+  height: 60rpx;
+  border: 1rpx solid #eaeaea;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.good-icon>.iconfont{
+  font-size: 38rpx;
+  color: #e4002f;
+}
+.price-price{
+  font-size: 28rpx;
+  font-weight: bold;
+  letter-spacing: 3rpx;
+}
