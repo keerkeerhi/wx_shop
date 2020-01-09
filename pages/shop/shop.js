@@ -87,13 +87,28 @@ Page({
   onClose(e){
     this.setData({show:false})
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
+  getGoods(params) {
+    Object.assign(params, this.pageInfo)
+    indexsev.wx_student(this.parObj).then(res => {
+      this.setData({ showLoading: false })
+      if (res.code == 0) {
+        let { students: list, num } = res.data
 
+        if (this.pageInfo.index == 0) {
+          this.setData({ dataList: list, num })
+        }
+        else {
+          let { dataList } = this.data
+          this.setData({ dataList: dataList.concat(list), num })
+        }
+      }
+      else
+        wx.showToast({
+          title: '获取会员列表超时',
+          icon: 'none'
+        })
+    })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
