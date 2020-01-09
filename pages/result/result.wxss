@@ -100,3 +100,28 @@
   font-weight: bold;
   letter-spacing: 3rpx;
 }
+
+.stuNav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 108rpx;
+  background: #FFE300;
+}
+.stuNL{
+  height: 60rpx;
+  background: #333;
+  width: 2rpx;
+}
+.stuNI{
+  color: #333;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+}
+.stuNI.active{
+  font-size: 36rpx;
+  font-weight: bold;
+}

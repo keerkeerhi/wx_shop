@@ -15,6 +15,20 @@
       </view>
   </view>
 </view>
+
+<view class='stuNav' >
+  <view class='stuNI {{navIndex==0?"active":""}}' data-inx="0" 
+  bindtap='toNav'
+  >
+    商品
+  </view>
+  <view class='stuNL' ></view>
+  <view class='stuNI {{navIndex==1?"active":""}} ' data-inx="1" 
+  bindtap='toNav' >
+    店铺
+  </view>
+</view>
+
 <view class="good-list base-shadow" >
   <view wx:for="{{dataList}}" wx:key="*this" class="good-item" >
     <image src="{{item.cover?item.cover:'../../assets/imgs/logo.png'}}"

@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navIndex:0,
     dataList:[],
     searchWords:"",
     position: '',
@@ -36,6 +37,12 @@ Page({
           icon: 'none'
         })
     })
+  },
+  toNav(e){
+    let { inx: navIndex} = e.currentTarget.dataset
+    this.setData({ navIndex,dataList:[]})
+    // this.pageInfo = { num: 10, index: 1 }
+    // this.getStus(this.parObj)
   },
   bindKeyInput(e) {
     let s = e.detail.value
