@@ -1,3 +1,31 @@
 <!--pages/mine/mine.wxml-->
-<header title="我的"></header>
-<text>pages/mine/mine.wxml</text>
+<header showHome title="个人中心"></header>
+<view class="mybanner" >
+  <view class="back-img" 
+  style="background-image: url({{'../../assets/imgs/time.jpg'}})" >
+  </view>
+  <view class="banner-cont" >
+    <view class="myname" >
+      <image class="head-img" src="../../assets/imgs/time.jpg" ></image>
+      <label>Dayu1.net</label>
+    </view>
+  </view>
+</view>
+<view class="mynav bottom-shadow" >
+  <view class="navitem active" >
+    <van-icon size="50rpx" name="pending-payment" />
+    <label class="item-lab" >待付款</label>
+  </view>
+  <view class="navitem" >
+    <van-icon size="50rpx" name="bag-o" />
+    <label class="item-lab" >待收货</label>
+  </view>
+  <view class="navitem" >
+    <van-icon size="50rpx" name="gold-coin-o" />
+    <label class="item-lab" >已退款</label>
+  </view>
+  <view class="navitem" >
+    <van-icon size="50rpx" name="orders-o" />
+    <label class="item-lab" >全部订单</label>
+  </view>
+</view>

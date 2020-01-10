@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/result/result",
     "pages/begin/beign",
     "pages/index/index",
     "pages/shop/shop",
     "pages/goods/goods",
-    "pages/mine/mine",
     "pages/shoplist/shoplist",
     "pages/shop_clothes/shop_clothes"
   ],
