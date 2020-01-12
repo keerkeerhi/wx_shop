@@ -9,11 +9,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    show: false,
     img_url,
     imgs:[],
-    goods:{}
+    goods:{},
+    currentNum: 1
   },
-
+  onClose(){this.setData({show:false})},
   /**
    * 生命周期函数--监听页面加载
    */
@@ -51,11 +53,19 @@ Page({
   onShareAppMessage: function () {
 
   },
+  showNum(){
+    this.setData({show:true})
+  },
+  onChange(e){
+    let {detail:currentNum} = e
+    this.setData({currentNum})
+  },
   getOrder(){
     let unionId = this.unionId
-    let {ShopDetails__id,id,price:OrderPrice} = this.data.goods
+    let {currentNum:CommodityNumber,goods} = this.data
+    let {ShopDetails__id,id,price:OrderPrice} = goods
     indexsev.create_order({RelatedShop:ShopDetails__id,
-      unionId,OrderAddress:'',OrderPhone:'',CommodityNumber:1,
+      unionId,OrderAddress:'',OrderPhone:'',CommodityNumber,
       OrderCommodity:id,OrderPrice,OrderNotes:''}).then(res=>{
       if (res.code==0)
       {

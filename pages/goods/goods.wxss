@@ -181,3 +181,60 @@ page{
   background:#ef0a23;
 }
 /* 购物车 end */
+
+.num-cont{
+  display: flex;
+  flex-direction: column;
+}
+.num-img{
+  width: 680rpx;
+  margin: 50rpx 34rpx;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2rpx solid #ececec;
+} 
+.num-img>image{
+  width: 200rpx;
+  height: 200rpx;
+}
+.price-info{
+  margin-left: 35rpx;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 28rpx;
+  line-height: 42rpx;
+}
+.price-info>view:first-child{
+  color: #ff3b4f;
+}
+.price-info>view:last-child{
+  color: #666;
+}
+.num-det{
+  width: 680rpx;
+  margin-left: 35rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.num-info{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+.sub-btn{
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 680rpx;
+  margin-left: 35rpx;
+  border-radius: 40rpx;
+  color: #FFF;
+  background: linear-gradient(0deg,#eb120c,#f84c24);
+  font-size: 32rpx;
+  text-align: center;
+  margin-top: 34rpx;
+}
+.sub-btn:active{
+  background: #eb120c;
+}

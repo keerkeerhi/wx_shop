@@ -50,10 +50,39 @@
         <view class="carbtn" >
           <label>加入购物车</label>
         </view>
-        <view bindtap="getOrder" class="buybtn" >
+        <view bindtap="showNum" class="buybtn" >
           <label>立即购买</label>
         </view>
       </view>
     </view>
 </view>
   <!-- banner end -->
+  <van-popup
+  show="{{ show }}"
+  closeable
+  round
+  position="bottom"
+  custom-style="height: 550rpx;"
+  bind:close="onClose"
+>
+  <view class="num-cont" >
+    <view class="num-img" >
+      <image mode="aspectFill" src="{{img_url+goods.img1}}" ></image>
+      <view class="price-info" >
+        <view>¥194.00</view>
+        <view>请选择数量</view>
+      </view>
+    </view>
+    <view class="num-det" >
+      <view class="num-info" >
+        <label>数量</label>
+        <label style="color:#666666;" >（9999件）</label>
+      </view>
+      <van-stepper value="{{currentNum}}"
+                  bind:change="onChange" />
+    </view>
+    <view bindtap="getOrder" class="sub-btn" >
+      确定
+    </view>
+  </view>
+</van-popup>
