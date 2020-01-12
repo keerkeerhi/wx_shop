@@ -14,7 +14,8 @@ Page({
     banners: [1,2,3],
     thisPos: {lat1:0,lng1:0},
     likes:[],
-    nearBy: []
+    nearBy: [],
+    adverts: []
   },
   //事件处理函数
   beFocus() {
@@ -52,7 +53,17 @@ Page({
         this.setData({ likes: res.data })
       }
     })
-
+    indexsev.home_img().then(res=>{
+      if (res.code==0)
+      {
+        this.setData({adverts:res.data})
+      }
+      else
+        wx.showToast({
+          title: '获取首页图片超时',
+          icon: 'none'
+        })
+    })
     // todo 有可能获取不到city哦，是否处理
     this.setData({ position: app.globalData.city})
   },

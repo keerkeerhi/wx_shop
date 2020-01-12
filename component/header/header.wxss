@@ -37,7 +37,7 @@
   justify-content: center;
   align-items: center;
 }
-.backBtn>label{
+.backBtn>.iconfont{
   color: #fff;
   font-size: 38rpx;
 }
@@ -48,7 +48,7 @@
   justify-content: center;
   align-items: center;
 }
-.homeBtn>label{
+.homeBtn>.iconfont{
   color: #fff;
   font-size: 43rpx;
 }

@@ -77,7 +77,7 @@ App({
             console.log('logback', res)
             wx.hideLoading();
             if (res.code == 0) {
-              let { unionid,session_key, nickname, image, phone } = res.data;
+              let { unionid,session_key, nickname, image, phone,openid } = res.data;
               _this.globalData.session_key = session_key;
               // wx.setStorageSync("unionid", unionid)
               // wx.setStorageSync("session_key", session_key)
@@ -86,7 +86,7 @@ App({
               if (nickname) {
                 _this.globalData.userInfo = { nickname, image, phone };
               }
-              login_res({ unionid, session_key, nickname, image, phone })
+              login_res({ unionid, session_key, nickname, image, phone,openid })
             }
             else
               wx.showToast({

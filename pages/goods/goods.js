@@ -1,70 +1,72 @@
 // pages/goods/goods.js
+import indexsev from '../../service/indexsev'
+import {img_url} from '../../service/baseconfig'
+import {getData} from '../../utils/pageManager'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgs:[1,2,3],
-    goods:{
-      title:"巫山烤全鱼",
-      price: 180
-    }
+    img_url,
+    imgs:[],
+    goods:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let {gId} = options
+    gId = 5;
+    let _this = this;
+    getData("loginData").then(({ unionid })=>{
+      _this.unionId = unionid
+    });
+    indexsev.goods_details({com_id:gId}).then(res=>{
+      if (res.code==0)
+      {
+        let goods = res.data[0]
+        let imgs = []
+        for (let key in goods)
+        {
+          console.log('----->key',key)
+          if (key.indexOf('img')>-1&&goods[key])
+            imgs.push(goods[key])
+        }
+        console.log('----->>',goods,imgs)
+        this.setData({goods,imgs})
+      }
+      else
+        wx.showToast({
+          title: '获取商品信息超时',
+          icon: 'none'
+        })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
+  },
+  getOrder(){
+    let unionId = this.unionId
+    let {ShopDetails__id,id,price:OrderPrice} = this.data.goods
+    indexsev.create_order({RelatedShop:ShopDetails__id,
+      unionId,OrderAddress:'',OrderPhone:'',CommodityNumber:1,
+      OrderCommodity:id,OrderPrice,OrderNotes:''}).then(res=>{
+      if (res.code==0)
+      {
+        wx.navigateTo({
+          url: '/pages/create_order/create_order?oNo='+res.data
+        })
+      }
+      else
+        wx.showToast({
+          title: '服务器超时',
+        })
+    })
   }
 })

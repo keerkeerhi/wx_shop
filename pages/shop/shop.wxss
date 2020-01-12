@@ -334,3 +334,43 @@ page{
   background:#eb1313;
 }
 /* ===============购物车 end */
+
+
+/**-------------------loading----------------------- */
+.loadding{
+  margin-top: 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  color: #303533;
+  /* justify-content: space-around; */
+}
+.loadding>label{
+  margin-right: 20rpx;
+}
+.loadding>image{
+  width: 42rpx;
+  height: 42rpx;
+  animation: rollA 2s linear infinite;
+  -webkit-animation: rollA 2s linear infinite;
+}
+@-webkit-keyframes rollA{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rollA{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

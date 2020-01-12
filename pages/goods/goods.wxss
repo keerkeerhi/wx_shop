@@ -85,6 +85,7 @@ page{
 .cont-detail{
   display: flex;
   flex-direction: column;
+  margin-bottom: 108rpx;
 }
 .cont-detail>text:first-child{
   margin:30rpx 40rpx;

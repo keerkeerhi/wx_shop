@@ -6,7 +6,7 @@
       autoplay="true" >
       <block wx:for="{{imgs}}" wx:key="*this">
         <swiper-item>
-          <image mode="aspectFill" src="../../assets/imgs/banner{{index+1}}.png" ></image>
+          <image mode="aspectFill" src="{{img_url+item}}" ></image>
         </swiper-item>
       </block>
     </swiper>
@@ -18,8 +18,8 @@
 
     <view class="good-info bottom-shadow" >
       <view class="shop-tit" >
-        <image mode="aspectFill" src="../../assets/imgs/banner2.png" ></image>
-        <label>东北大饭店</label>
+        <image mode="aspectFill" src="{{img_url+ goods.ShopDetails__cover}}" ></image>
+        <label>{{goods.ShopDetails__ShopName}}</label>
       </view>
       <navigator url="/pages/shop/shop" class="shop-in" >
         <label>进入店铺</label>
@@ -34,8 +34,8 @@
       <view class="cont-detail">
         <text>巫山烤全鱼，味道鲜美，美味可口，是您外出品尝美食的完美选择。就卡死的房间卡速度来房间卡士大夫
 </text>
-        <image class="detail-imgs"  wx:for="imgs" wx:key="*this" 
-        mode="aspectFill" src="../../assets/imgs/good{{index+1}}.jpg" ></image>
+        <image class="detail-imgs"  wx:for="{{imgs}}" wx:key="*this" 
+        mode="aspectFill" src="{{img_url+item}}" ></image>
       </view>
     </view>
 
@@ -50,7 +50,7 @@
         <view class="carbtn" >
           <label>加入购物车</label>
         </view>
-        <view class="buybtn" >
+        <view bindtap="getOrder" class="buybtn" >
           <label>立即购买</label>
         </view>
       </view>

@@ -27,9 +27,9 @@
   <view class="banner" >
       <swiper indicator-dots="true"
         autoplay="true" >
-        <block wx:for="{{banners}}" wx:key="*this">
+        <block wx:for="{{adverts}}" wx:key="*this">
           <swiper-item>
-            <image mode="aspectFill" src="../../assets/imgs/banner{{index+1}}.png" ></image>
+            <image mode="aspectFill" src="{{img_url+item.img}}" ></image>
           </swiper-item>
         </block>
       </swiper>
@@ -88,7 +88,7 @@
     <scroll-view class="scroll-header" scroll-x="true" >
       <view class="like-item" wx:for="{{likes}}"  wx:key="*this" >
         <view class="like-good" >
-          <image mode="aspectFill" src="../../assets/imgs/good{{index+1}}.jpg" ></image>
+          <image mode="aspectFill" src="{{img_url + item.img1}}" ></image>
           <label class="itemname" >{{item.name}}</label>
           <view class="priceItem" >
             <label>¥{{item.price}}</label>

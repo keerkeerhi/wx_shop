@@ -13,15 +13,14 @@
 </view>
 
 <view class="shopcont" >
-  <van-sidebar custom-class="item-test" active-key="{{ activeKey }}" bind:change="onChange">
-    <van-sidebar-item title="标签名称" />
-    <van-sidebar-item title="标签名称" />
-    <van-sidebar-item title="标签名称" />
+  <van-sidebar custom-class="item-test" active-key="{{ activeKey }}" bind:change="navChange">
+    <van-sidebar-item title="全部" />
+    <van-sidebar-item wx:for="{{typeList}}" title="{{item.CommodityName}}" />
   </van-sidebar>
   <view class="goodlist" >
-    <navigator url="/pages/goods/goods" wx:for="{{goods}}" wx:key="*this" class="goodItem" >
-      <image mode="aspectFill" src="../../assets/imgs/banner{{index%2+1}}.png" ></image>
-      <label class="good-tit" >{{item.title}}asdfasdfasdfasdfasd</label>
+    <navigator url="/pages/goods/goods?gId={{item.id}}" wx:for="{{goods}}" wx:key="*this" class="goodItem" >
+      <image mode="aspectFill" src="{{img_url+item.img1}}" ></image>
+      <label class="good-tit" >{{item.name}}</label>
       <view catchtap="toCar" class="pricecar" >
         <label>¥{{item.price}}</label>
         <view class="putCar" >
@@ -30,7 +29,7 @@
       </view>
     </navigator>
   </view>
-
+  <van-loading wx:if="{{showLoading}}" />
   <view class="carTip base-shadow" >
     <navigator bindtap="initHome" 
     class="tip-item home-item" open-type="reLaunch" url="/pages/index/index" >

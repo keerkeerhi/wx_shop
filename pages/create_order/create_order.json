@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon",
+    "header": "/component/header/header",
+    "van-cell-group": "@vant/weapp/cell-group",
+    "van-field": "@vant/weapp/field"
+  }
+}

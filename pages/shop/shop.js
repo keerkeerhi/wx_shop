@@ -2,17 +2,22 @@
 import { getData, putData,delData} from '../../utils/pageManager.js'
 let app = getApp();
 import indexsev from '../../service/indexsev.js'
+import {img_url} from '../../service/baseconfig'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    showLoading:false,
+    img_url,
     activeKey: 0,
     shop_details:{},
     goods:[],
+    typeList:[],
     // 购物车相关 start
-    show: true,
+    show: false,
     shops: [
       {id:1,title:'海阔天空店',
       goods:[
@@ -55,24 +60,101 @@ Page({
    */
   onLoad: function (options) {
     let {shopId} = options
-    getData("shopData").then(res=>{
+    shopId = 5;
+    this.shopId = shopId
+    this.pageInfo = { index: 1 }
+    this.initData()
+  },
+  initData(){
+    let sp = getData("shopData")
+    if (sp)
+    {
+      sp.then(res=>{
+        if (res.code==0)
+        {
+          console.log('======shopData')
+          let shop_details = res.data
+          this.setData({shop_details})
+          delData("shopData")
+        }
+        else
+        {
+          wx.showToast({
+            title: '获取店铺详情超时',
+            icon: 'none'
+          })
+        }
+      })
+      return;
+    }
+    indexsev.shop_detail({'shop_id':this.shopId}).then(res=>{
+      if (res.code==0)
+        {
+          let shop_details = res.data
+          this.setData({shop_details})
+        }
+        else
+        {
+          wx.showToast({
+            title: '获取店铺详情超时',
+            icon: 'none'
+          })
+        }
+    })
+
+    indexsev.label_mgt({'shop_id':this.shopId}).then(res=>{
+      if (res.code==0)
+        {
+          let typeList = res.data
+          this.setData({typeList})
+        }
+        else
+        {
+          wx.showToast({
+            title: '获取商品标签超时',
+            icon: 'none'
+          })
+        }
+    })
+    this.getProduct()
+  },
+  getProduct(label){
+    let pages = this.pageInfo.index
+    indexsev.get_shop_commodity({'shop_id':this.shopId,label,pages}).then(res=>{
       if (res.code==0)
       {
-        let { shop_details, shop_commodity} = res.data
-        this.setData({shop_details})
-        delData("shopData")
+        let list = res.data
+        if (this.pageInfo.index == 1) {
+          this.setData({ goods: list })
+        }
+        else {
+          let { goods } = this.data
+          this.setData({ goods: goods.concat(list) })
+        }
       }
       else
-      {
         wx.showToast({
-          title: '获取店铺详情超时',
+          title: '获取商品超时',
           icon: 'none'
         })
-      }
     })
   },
   toCar(e){
     console.log('----catch',e)
+  },
+  navChange(ev)
+  {
+    let {detail:index} = ev;
+    this.pageInfo.index = 1
+    if (index==0)
+    {
+      this.getProduct()
+      return;
+    }
+    let {typeList} = this.data
+    let type = typeList[index-1]
+    this.type = type
+    this.getProduct(type.id)
   },
   onChange(event) {
     wx.showToast({
@@ -87,35 +169,17 @@ Page({
   onClose(e){
     this.setData({show:false})
   },
-  getGoods(params) {
-    Object.assign(params, this.pageInfo)
-    indexsev.wx_student(this.parObj).then(res => {
-      this.setData({ showLoading: false })
-      if (res.code == 0) {
-        let { students: list, num } = res.data
-
-        if (this.pageInfo.index == 0) {
-          this.setData({ dataList: list, num })
-        }
-        else {
-          let { dataList } = this.data
-          this.setData({ dataList: dataList.concat(list), num })
-        }
-      }
-      else
-        wx.showToast({
-          title: '获取会员列表超时',
-          icon: 'none'
-        })
-    })
-  },
-  /**
+/**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.showLoading)
+      return;
+    let pageInfo = this.pageInfo;
+    pageInfo.index = pageInfo.index + 1;
+    this.setData({ showLoading: true })
+    this.getProduct(this.type)
   },
-
   /**
    * 用户点击右上角分享
    */

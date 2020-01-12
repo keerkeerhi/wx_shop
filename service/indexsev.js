@@ -7,7 +7,6 @@ const login_url = base_url + 'xuser-info/';
 const upload_file = base_url + 'base/upload_file/'
 // 更新用户信息
 const updateUser = base_url + 'decrypt/';
-
 // 所有美食
 const food = base_url + 'food/';
 // 所有百货
@@ -32,8 +31,127 @@ const search = base_url + 'search/'
 const user_like = base_url + 'user-like/'
 // 店铺详情
 const shop_detail = base_url + 'shop-details/'
+// 广告banner
+const home_img = base_url + 'home-img/'
+// 商品标签
+const label_mgt = base_url + 'label-mgt/'
+// 根据标签获取商品
+const get_shop_commodity = base_url + 'get-shop-commodity/'
+// 商品详情
+const goods_details = base_url + 'com-details/'
+// 订单详情
+const order_detail = base_url + 'order-details/'
+// 更新订单
+const edit_order = base_url + 'edit-order/'
+// 支付
+const pay = base_url + 'pay/'
 
 module.exports = {
+  pay(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: pay,
+        method: "POST",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  edit_order(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: edit_order,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  order_detail(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: order_detail,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  goods_details(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: goods_details,
+        method: "POST",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  get_shop_commodity(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: get_shop_commodity,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  label_mgt(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: label_mgt,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
+  home_img(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: home_img,
+        method: "GET",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
   shop_detail(data) {
     return new Promise((resolve, reject) => {
       wx.request({
