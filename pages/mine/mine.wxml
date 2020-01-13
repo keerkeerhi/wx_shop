@@ -12,19 +12,19 @@
   </view>
 </view>
 <view class="mynav bottom-shadow" >
-  <view class="navitem active" >
+  <view class="navitem {{navIndex==0?'active':''}}" bindtap="navTo" data-inx="0" >
     <van-icon size="50rpx" name="pending-payment" />
     <label class="item-lab" >待付款</label>
   </view>
-  <view class="navitem" >
+  <view class="navitem {{navIndex==1?'active':''}}" bindtap="navTo" data-inx="1" >
     <van-icon size="50rpx" name="bag-o" />
     <label class="item-lab" >待收货</label>
   </view>
-  <view class="navitem" >
+  <view class="navitem {{navIndex==2?'active':''}}" bindtap="navTo" data-inx="2" >
     <van-icon size="50rpx" name="gold-coin-o" />
     <label class="item-lab" >已退款</label>
   </view>
-  <view class="navitem" >
+  <view class="navitem {{navIndex==3?'active':''}}" bindtap="navTo" data-inx="3" >
     <van-icon size="50rpx" name="orders-o" />
     <label class="item-lab" >全部订单</label>
   </view>

@@ -48,37 +48,6 @@ const fPromise = fn => obj => {
   })
 }
 
-// goods = { id: '', price: '', num: '' }
-const addCart = (shopId,goods,callBack)=>{
-  wx.getStorage({
-    key: 'shopCar',
-    success (res) {
-      let data = res.data
-      let carObj;
-      if (data)
-        carObj = data
-      else
-        carObj = Object.create(null)
-      let list;
-      if (shopId in carObj)
-        list = carObj[shopId]
-      else
-      {
-        list = []
-        carObj[shopId] = list;
-      }
-      list.push(goods)
-      wx.setStorage({
-        data: carObj,
-        key: 'shopCar',
-        success(res) {
-          callBack(res)
-        }
-      })
-    }
-  })
-}
-
 function arrayIndex(list, val, key) {
   for (var i = 0; i < list.length; i++) {
     if (list[i][key] == val[key])
@@ -92,18 +61,75 @@ function arrayRemove(list, item, key) {
     list.splice(index, 1);
   }
 }
+
+// goods = { id: '', price: '', num: '' }
+const addCart = (shopId,shopName,goods,callBack)=>{
+  wx.getStorage({
+    key: 'shopCar',
+    success (res) {
+      let data = res.data
+      let carObj;
+      if (data)
+        carObj = data
+      else
+        carObj = Object.create(null)
+      let list;
+      if (shopId in carObj)
+        list = carObj[shopId].goods
+      else
+      {
+        list = []
+        carObj[shopId] = {shopName,goods:list};
+      }
+      list.push(goods)
+      wx.setStorage({
+        data: carObj,
+        key: 'shopCar',
+        success(res) {
+          callBack(carObj)
+        }
+      })
+    }
+  })
+}
 const delCart = (shopId,goodsId,callBack)=>{
   wx.getStorage({
     key: 'shopCar',
     success (res) {
       let carObj = res.data
-      let list = carObj[shopId]
+      let list = carObj[shopId].goods
       arrayRemove(list,{'id':goodsId},'id')
       wx.setStorage({
         data: carObj,
         key: 'shopCar',
         success(res) {
-          callBack(res)
+          callBack(carObj)
+        }
+      })
+    }
+  })
+}
+
+// 更新商品数量
+const updateNum = (shopId,goodsId,num,callBack)=>{
+  wx.getStorage({
+    key: 'shopCar',
+    success (res) {
+      let carObj = res.data
+      let list = carObj[shopId].goods
+      let goods;
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].id == shopId)
+        {
+          goods = list[i];
+        }
+      }
+      goods.num = num
+      wx.setStorage({
+        data: carObj,
+        key: 'shopCar',
+        success(res) {
+          callBack(carObj)
         }
       })
     }

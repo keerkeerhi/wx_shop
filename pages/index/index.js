@@ -33,8 +33,19 @@ Page({
       url: '/pages/shop/shop?shopId='+shopid,
     })
   },
+  toMine(e){
+    let unionId = this.unionid;
+    let status = 0;
+    putData("mineData",indesev.my_order({unionId,status,pages:1}));
+    wx.navigateTo({
+      url: '/pages/mine/mine',
+    })
+  },
   onLoad: function () {
     let _this = this;
+    getData("loginData").then(({ unionid })=>{
+      _this.unionid = unionid;
+    })
     getData('posData').then(({ latitude, longitude })=>{
       this.setData({ thisPos: { lat1: latitude, lng1: longitude } })
     })

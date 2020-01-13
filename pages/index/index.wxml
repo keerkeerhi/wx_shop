@@ -13,9 +13,9 @@
       bindfocus="beFocus" 
       bindconfirm="doSearch"
       bindblur="beNoFoc" ></input>
-      <navigator url="/pages/mine/mine" class="mineIcon" >
+      <view bindtap="toMine" class="mineIcon" >
         <label class="iconfont icon04f" ></label>
-      </navigator>
+      </view>
       <view wx:if="{{!isFocus&&!searchWords}}" class="toSearch">
         <label class="iconfont iconsousuo" ></label>
         <label class="pholder" >搜索商品或商铺</label>

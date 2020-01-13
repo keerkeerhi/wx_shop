@@ -17,6 +17,7 @@ Page({
     shop_details:{},
     goods:[],
     typeList:[],
+
     // 购物车相关 start
     show: false,
     shops: [
@@ -102,13 +103,7 @@ Page({
           if (res.code==0)
           {
             let list = res.data
-            if (this.pageInfo.index == 1) {
-              this.setData({ goods: list })
-            }
-            else {
-              let { goods } = this.data
-              this.setData({ goods: goods.concat(list) })
-            }
+            this.setData({ goods: list })
           }
           else
             wx.showToast({
@@ -171,9 +166,6 @@ Page({
         })
     })
   },
-  toCar(e){
-    console.log('----catch',e)
-  },
   navChange(ev)
   {
     let {detail:index} = ev;
@@ -212,11 +204,19 @@ Page({
     this.setData({ showLoading: true })
     this.getProduct(this.type)
   },
-  addCart(){
-    addCart()
+  addCart(e){
+    let shopId = this.shopId;
+    let {shopName} = this.data.shop_details
+    let {1:num,id,name,price} = e.currentTarget.dataset
+    addCart(shopId,shopName,{id,name,price,num},carObj=>{
+      console.log('==add===>>',carObj)
+    })
   },
-  delCart(){
-    delCart()
+  delCart(e){
+    let {shopId,goodsId} = e.currentTarget.dataset
+    delCart(shopId,goodsId,carObj=>{
+      console.log('===del==>>',carObj)
+    })
   },
   /**
    * 用户点击右上角分享

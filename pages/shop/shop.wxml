@@ -21,7 +21,8 @@
     <navigator url="/pages/goods/goods?gId={{item.id}}" wx:for="{{goods}}" wx:key="*this" class="goodItem" >
       <image mode="aspectFill" src="{{img_url+item.img1}}" ></image>
       <label class="good-tit" >{{item.name}}</label>
-      <view catchtap="toCar" class="pricecar" >
+      <view catchtap="addCart" data-id="{{item.id}}" 
+      data-name="{{item.name}}" data-price="{{item.price}}" class="pricecar" >
         <label>¥{{item.price}}</label>
         <view class="putCar" >
           <label class="iconfont icongouwuche" ></label>
