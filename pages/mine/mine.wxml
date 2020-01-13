@@ -6,8 +6,8 @@
   </view>
   <view class="banner-cont" >
     <view class="myname" >
-      <image class="head-img" src="../../assets/imgs/time.jpg" ></image>
-      <label>Dayu1.net</label>
+      <image class="head-img" src="{{image}}" ></image>
+      <label>{{nickname}}</label>
     </view>
   </view>
 </view>
@@ -27,5 +27,51 @@
   <view class="navitem" >
     <van-icon size="50rpx" name="orders-o" />
     <label class="item-lab" >全部订单</label>
+  </view>
+</view>
+<view class="shopItem base-shadow" >
+  <view class="shopCont" >
+    <view class="shopHead" >
+      <view class="toShop" >
+        <van-icon size="20" color="#333333" name="shop-collect-o" />
+        <label class="shopTit" >大玉超市</label>
+        <van-icon size="12" name="arrow" />
+      </view>
+      <label>
+        待付款
+      </label>
+    </view>
+
+    <view wx:if="{{false}}" class="goodInfo" >
+      <image src="../../assets/imgs/time.jpg" ></image>
+      <view class="goodDet" >
+        <label>包邮你好阿这是很好吃的大红袍，非常非常好吃的阿，哈哈哈哈吃的大红袍，非常非常好吃的阿吃的大红袍，非常非常好吃的阿吃的大红袍，非常非常好吃的阿</label>
+        <label>¥9.90×1</label>
+      </view>
+    </view>
+    <scroll-view wx:else class="scroll-header" scroll-x="true" >
+      <view class="like-item" wx:for="{{likes}}"  wx:key="*this" >
+        <navigator url="/pages/order_detail/order_detail" class="like-good" >
+          <image mode="aspectFill" src="../../assets/imgs/time.jpg" ></image>
+          <view class="goodTip" >
+            ×1
+          </view>
+        </navigator>
+      </view>
+    </scroll-view>
+
+    <view class="priceInfo" >
+      <label class="pricen">共1件商品</label>
+      <label class="pricel">实付款：</label>
+      <label class="pricep" >¥9.00</label>
+    </view>
+    <view class="shopBtn" >
+      <view class="payBtn" >
+        付款
+      </view>
+      <view class="payBtn" >
+        取消订单
+      </view>
+    </view>
   </view>
 </view>

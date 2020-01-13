@@ -45,8 +45,24 @@ const order_detail = base_url + 'order-details/'
 const edit_order = base_url + 'edit-order/'
 // 支付
 const pay = base_url + 'pay/'
-
+// 我的订单
+const my_order = base_url + 'my-order/'
 module.exports = {
+  my_order(data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: my_order,
+        method: "POST",
+        data,
+        success(res) {
+          resolve(res.data)
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    })
+  },
   pay(data) {
     return new Promise((resolve, reject) => {
       wx.request({

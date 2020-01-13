@@ -1,0 +1,14 @@
+{
+	data: [
+	  { 
+      shopId: '',
+      goods:  [ { id: '', price: '', num: '' },  { id: '', price: '', num: '' } ]
+    },
+    { 
+      shopId: '',
+      goods:  [ { id: '', price: '', num: '' },  { id: '', price: '', num: '' } ]
+    }
+	],
+	OrderAddress: '',
+	OrderPhone: ''
+}

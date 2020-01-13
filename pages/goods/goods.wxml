@@ -12,7 +12,7 @@
     </swiper>
     
     <view class="good-price" >
-      <label>{{goods.title}}</label>
+      <label>{{goods.name}}</label>
       <label>¥ {{goods.price}}</label>
     </view>
 
@@ -69,7 +69,7 @@
     <view class="num-img" >
       <image mode="aspectFill" src="{{img_url+goods.img1}}" ></image>
       <view class="price-info" >
-        <view>¥194.00</view>
+        <view>¥{{goods.price*currentNum}}</view>
         <view>请选择数量</view>
       </view>
     </view>

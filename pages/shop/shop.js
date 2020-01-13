@@ -3,6 +3,7 @@ import { getData, putData,delData} from '../../utils/pageManager.js'
 let app = getApp();
 import indexsev from '../../service/indexsev.js'
 import {img_url} from '../../service/baseconfig'
+import {addCart,delCart} from '../../utils/util'
 
 Page({
 
@@ -19,12 +20,12 @@ Page({
     // 购物车相关 start
     show: false,
     shops: [
-      {id:1,title:'海阔天空店',
-      goods:[
-        {title:'天空',img:"",price:20,num:2,checked:false},
-        { title: '海阔', img: "", price: 21, num: 1,checked:false }
-      ],
-      checked:false
+      { id:1,title:'海阔天空店',
+        goods:[
+          {title:'天空',img:"",price:20,num:2,checked:false},
+          { title: '海阔', img: "", price: 21, num: 1,checked:false }
+        ],
+        checked:false
       },
       {
         id: 2, title: '天空海阔店',
@@ -60,7 +61,6 @@ Page({
    */
   onLoad: function (options) {
     let {shopId} = options
-    shopId = 5;
     this.shopId = shopId
     this.pageInfo = { index: 1 }
     this.initData()
@@ -84,6 +84,38 @@ Page({
             icon: 'none'
           })
         }
+        getData("labelData").then(res=>{
+          if (res.code==0)
+            {
+              let typeList = res.data
+              this.setData({typeList})
+            }
+            else
+            {
+              wx.showToast({
+                title: '获取商品标签超时',
+                icon: 'none'
+              })
+            }
+        })
+        getData("productData").then(res=>{
+          if (res.code==0)
+          {
+            let list = res.data
+            if (this.pageInfo.index == 1) {
+              this.setData({ goods: list })
+            }
+            else {
+              let { goods } = this.data
+              this.setData({ goods: goods.concat(list) })
+            }
+          }
+          else
+            wx.showToast({
+              title: '获取商品超时',
+              icon: 'none'
+            })
+        })
       })
       return;
     }
@@ -179,6 +211,12 @@ Page({
     pageInfo.index = pageInfo.index + 1;
     this.setData({ showLoading: true })
     this.getProduct(this.type)
+  },
+  addCart(){
+    addCart()
+  },
+  delCart(){
+    delCart()
   },
   /**
    * 用户点击右上角分享

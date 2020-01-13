@@ -48,8 +48,70 @@ const fPromise = fn => obj => {
   })
 }
 
+// goods = { id: '', price: '', num: '' }
+const addCart = (shopId,goods,callBack)=>{
+  wx.getStorage({
+    key: 'shopCar',
+    success (res) {
+      let data = res.data
+      let carObj;
+      if (data)
+        carObj = data
+      else
+        carObj = Object.create(null)
+      let list;
+      if (shopId in carObj)
+        list = carObj[shopId]
+      else
+      {
+        list = []
+        carObj[shopId] = list;
+      }
+      list.push(goods)
+      wx.setStorage({
+        data: carObj,
+        key: 'shopCar',
+        success(res) {
+          callBack(res)
+        }
+      })
+    }
+  })
+}
+
+function arrayIndex(list, val, key) {
+  for (var i = 0; i < list.length; i++) {
+    if (list[i][key] == val[key])
+      return i;
+  }
+  return -1;
+}
+function arrayRemove(list, item, key) {
+  var index = arrayIndex(list, item, key);
+  if (index > -1) {
+    list.splice(index, 1);
+  }
+}
+const delCart = (shopId,goodsId,callBack)=>{
+  wx.getStorage({
+    key: 'shopCar',
+    success (res) {
+      let carObj = res.data
+      let list = carObj[shopId]
+      arrayRemove(list,{'id':goodsId},'id')
+      wx.setStorage({
+        data: carObj,
+        key: 'shopCar',
+        success(res) {
+          callBack(res)
+        }
+      })
+    }
+  })
+}
+
 module.exports = {
   formatTime,
   getMaxMinLongitudeLatitude,
-  fPromise
+  fPromise,addCart,delCart
 }

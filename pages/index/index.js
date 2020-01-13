@@ -25,8 +25,10 @@ Page({
     this.setData({ isFocus:false })
   },
   toShop(e){
-    let { shopid } = e.currentTarget.dataset
+    let { shopid,label } = e.currentTarget.dataset
     putData("shopData", indexsev.shop_detail({'shop_id':shopid}))
+    putData("labelData", indexsev.label_mgt({'shop_id':shopid}))
+    putData("productData",indexsev.get_shop_commodity({'shop_id':shopid,label,pages:1}))
     wx.navigateTo({
       url: '/pages/shop/shop?shopId='+shopid,
     })

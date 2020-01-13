@@ -21,7 +21,6 @@ Page({
    */
   onLoad: function (options) {
     let {gId} = options
-    gId = 5;
     let _this = this;
     getData("loginData").then(({ unionid })=>{
       _this.unionId = unionid
@@ -62,11 +61,10 @@ Page({
   },
   getOrder(){
     let unionId = this.unionId
-    let {currentNum:CommodityNumber,goods} = this.data
-    let {ShopDetails__id,id,price:OrderPrice} = goods
-    indexsev.create_order({RelatedShop:ShopDetails__id,
-      unionId,OrderAddress:'',OrderPhone:'',CommodityNumber,
-      OrderCommodity:id,OrderPrice,OrderNotes:''}).then(res=>{
+    let {currentNum,goods} = this.data
+    let {ShopDetails__id,id,price} = goods
+    indexsev.create_order({data:[{shopId:ShopDetails__id,goods:[{id,price,num:currentNum}]}],
+      unionId,OrderAddress:'',OrderPhone:''}).then(res=>{
       if (res.code==0)
       {
         wx.navigateTo({

@@ -1,0 +1,73 @@
+<!--pages/create_order/create_order.wxml-->
+<view class="orderPage" >
+  <header title="订单详情"></header>
+
+  <!-- --------头部 start -->
+  <view class="orderInfo bottom-shadow" >
+    <view class="addressCont" >
+      <view class="orderSta" >
+        <label>已送达</label>
+        <view class="linkCont" >
+          <label>联系商家</label>
+          <view class="linkBtn" >
+            <van-icon color="#6f6f6f" size="16" name="phone-o" />
+            <label>15537232100</label>
+          </view>
+        </view>
+      </view>
+
+      <view class="address-info" >
+        <van-icon size="16" color="#6f6f6f" name="location-o" />
+        <view class="addCont" >
+          <view class="manInfo" >
+            <label>郑晓峰</label>
+            <label>15537232100</label>
+          </view>
+          <view class="address-words" >
+            河南省安阳市汤阴县建业森林半岛一期河南省安阳市汤阴县建业森林半岛一期河南省安阳市汤阴县建业森林半岛一期河南省安阳市汤阴县建业森林半岛一期
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- --------头部 end -->
+
+  <view class="shopItem base-shadow" >
+    <view class="shopCont" >
+      <view class="shopHead" >
+        <view class="toShop" >
+          <van-icon size="20" color="#333333" name="shop-collect-o" />
+          <label class="shopTit" >大玉超市</label>
+        </view>
+        <label> </label>
+      </view>
+      
+      <view class="goodInfo" >
+        <image src="../../assets/imgs/time.jpg" ></image>
+        <view class="goodDet" >
+          <label>包邮你好阿这是很好吃的大红袍，非常非常好吃的阿，哈哈哈哈吃的大红袍，非常非常好吃的阿吃的大红袍，非常非常好吃的阿吃的大红袍，非常非常好吃的阿</label>
+          <label>¥9.90×1</label>
+        </view>
+      </view>
+
+      <view class="priceInfo" >
+        <view class="send-item">
+          <label>商品金额</label>
+          <label>¥200</label>
+        </view>
+        <view class="send-item" >
+          <label>运费</label>
+          <label>¥2</label>
+        </view>
+        <view class="send-item" >
+          <label>实付款</label>
+          <label style="color:#ff413d;">¥47</label>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="send-price base-shadow">
+    
+  </view>
+</view>

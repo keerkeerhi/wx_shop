@@ -17,8 +17,6 @@ Page({
    */
   onLoad: function (options) {
     let {oNo} = options
-    console.log('======>>',oNo)
-    oNo = "20200112143853997023";
     this.oNo = oNo;
     let _this = this;
     getData("loginData").then(({ openid })=>{
